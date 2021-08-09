@@ -1,19 +1,16 @@
-From 8fa1a710312e7ab404096dee541146300b9c5775 Mon Sep 17 00:00:00 2001
+From 376b2a8f78c4eca12ba430ecb4963d13365e7e17 Mon Sep 17 00:00:00 2001
 From: Speedy11CZ <speedy@arcadiamc.cz>
-Date: Mon, 09 Aug 2021 20:50:25 +0200
+Date: Mon, 9 Aug 2021 20:50:25 +0200
 Subject: [PATCH] This is ArcadePaper
 
----
- pom.xml | 25 ++++---------------------
- 1 file changed, 4 insertions(+), 21 deletions(-)
 
 diff --git a/pom.xml b/pom.xml
-index fe9d6d2..b5ccba3 100644
+index fe9d6d26..bc65dcaa 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -4,20 +4,15 @@
      <modelVersion>4.0.0</modelVersion>
-
+ 
      <parent>
 -        <groupId>org.github.paperspigot</groupId>
 -        <artifactId>paperspigot-parent</artifactId>
@@ -22,13 +19,13 @@ index fe9d6d2..b5ccba3 100644
 +        <artifactId>arcadepaper-parent</artifactId>
 +        <version>1.8-SNAPSHOT</version>
      </parent>
-
+ 
 -    <groupId>org.github.paperspigot</groupId>
 -    <artifactId>paperspigot-api</artifactId>
 +    <artifactId>arcadepaper-api</artifactId>
      <version>1.8.8-R0.1-SNAPSHOT</version>
      <packaging>jar</packaging>
-
+ 
 -    <name>PaperSpigot-API</name>
 -    <url>https://hub.spigotmc.org/stash/projects/PAPER/</url>
 -    <description>An enhanced plugin API for Minecraft servers.</description>
@@ -39,7 +36,7 @@ index fe9d6d2..b5ccba3 100644
 @@ -26,18 +21,6 @@
          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
      </properties>
-
+ 
 -    <!-- just until we get deployment to central approved -->
 -    <distributionManagement>
 -        <repository>
@@ -55,5 +52,6 @@ index fe9d6d2..b5ccba3 100644
      <!-- required until fixed plexus-compiler-eclipse is deployed -->
      <pluginRepositories>
          <pluginRepository>
---
-2.10.2
+-- 
+2.24.1.windows.2
+
