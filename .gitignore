@@ -1,0 +1,6 @@
+/.idea/
+/base/mc-dev/
+/ArcadePaper-API/
+/ArcadePaper-Server/
+*.iml
+*.DS_Store
