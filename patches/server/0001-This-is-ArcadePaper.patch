@@ -1,4 +1,4 @@
-From b0318acd59d4dc39e87885c8ac8639db29bb4738 Mon Sep 17 00:00:00 2001
+From c568efa6ae346304639b66e6f7dabf89de6c8391 Mon Sep 17 00:00:00 2001
 From: Speedy11CZ <speedy@arcadiamc.cz>
 Date: Mon, 9 Aug 2021 20:50:25 +0200
 Subject: [PATCH] This is ArcadePaper
@@ -6,7 +6,7 @@ Subject: [PATCH] This is ArcadePaper
   Also includes some legacy mc-dev imports
 
 diff --git a/pom.xml b/pom.xml
-index 6aaba502..09c9291d 100644
+index 6aaba502..7ae5aa28 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -1,12 +1,10 @@
@@ -48,15 +48,89 @@ index 6aaba502..09c9291d 100644
              <version>${project.version}</version>
              <type>jar</type>
              <scope>compile</scope>
-@@ -113,7 +111,7 @@
-             <artifactId>gitdescribe-maven-plugin</artifactId>
-             <version>1.3</version>
-             <configuration>
+@@ -100,7 +98,7 @@
+         <!-- PaperSpigot - Repo for gitdescribe -->
+         <pluginRepository>
+             <id>destroystokyo</id>
+-            <url>https://ci.destroystokyo.com/plugin/repository/everything/</url>
++            <url>https://papermc.io/repo/repository/maven-public/</url>
+         </pluginRepository>
+     </pluginRepositories>
+ 
+@@ -109,22 +107,48 @@
+         <defaultGoal>install</defaultGoal>
+         <plugins>
+             <plugin>
+-            <groupId>com.lukegb.mojo</groupId>
+-            <artifactId>gitdescribe-maven-plugin</artifactId>
+-            <version>1.3</version>
+-            <configuration>
 -                <outputPrefix>git-PaperSpigot-</outputPrefix>
-+                <outputPrefix>git-ArcadePaper-</outputPrefix>
-                 <scmDirectory>..</scmDirectory>
-             </configuration>
-             <executions>
+-                <scmDirectory>..</scmDirectory>
+-            </configuration>
+-            <executions>
+-                <execution>
+-                    <phase>compile</phase>
+-                    <goals>
+-                        <goal>gitdescribe</goal>
+-                    </goals>
+-                </execution>
+-            </executions>
+-        </plugin>
++                <groupId>net.md-5</groupId>
++                <artifactId>scriptus</artifactId>
++                <version>0.4.1</version>
++                <executions>
++                    <execution>
++                        <id>ex-arcade</id>
++                        <configuration>
++                            <format>git-ArcadePaper-%s</format>
++                            <scmDirectory>../</scmDirectory>
++                            <descriptionProperty>arcadepaper.desc</descriptionProperty>
++                        </configuration>
++                        <phase>initialize</phase>
++                        <goals>
++                            <goal>describe</goal>
++                        </goals>
++                    </execution>
++                    <execution>
++                        <id>ex-spigot</id>
++                        <configuration>
++                            <format>git-Spigot-%s</format>
++                            <scmDirectory>../base/Paper/Spigot-Server</scmDirectory>
++                            <descriptionProperty>spigot.desc</descriptionProperty>
++                        </configuration>
++                        <phase>initialize</phase>
++                        <goals>
++                            <goal>describe</goal>
++                        </goals>
++                    </execution>
++                    <execution>
++                        <id>ex-craftbukkit</id>
++                        <configuration>
++                            <format>-%s</format>
++                            <scmDirectory>../base/Paper/CraftBukkit</scmDirectory>
++                            <descriptionProperty>craftbukkit.desc</descriptionProperty>
++                        </configuration>
++                        <phase>initialize</phase>
++                        <goals>
++                            <goal>describe</goal>
++                        </goals>
++                    </execution>
++                </executions>
++            </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-jar-plugin</artifactId>
+@@ -135,7 +159,7 @@
+                         <manifestEntries>
+                             <Main-Class>org.bukkit.craftbukkit.Main</Main-Class>
+                             <Implementation-Title>CraftBukkit</Implementation-Title>
+-                            <Implementation-Version>${describe}</Implementation-Version>
++                            <Implementation-Version>${arcadepaper.desc}${spigot.desc}${craftbukkit.desc}</Implementation-Version>
+                             <Implementation-Vendor>Bukkit Team</Implementation-Vendor>
+                             <Specification-Title>Bukkit</Specification-Title>
+                             <Specification-Version>${api.version}</Specification-Version>
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
 index b400ce04..fee4a6b0 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
