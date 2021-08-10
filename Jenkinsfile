@@ -11,19 +11,18 @@ pipeline {
       parallel {
         stage('Artifact') {
           steps {
-            archiveArtifacts 'ArcadePaper-Server/arcadepaper-1.8.8-R0.1-SNAPSHOT.jar'
+            archiveArtifacts 'ArcadePaper-Server/target/arcadepaper-1.8.8-R0.1-SNAPSHOT.jar'
           }
         }
 
         stage('Repository') {
           steps {
-            sh '''mvn -Dmaven.test.skip=true --projects cz.arcadiamc:arcadepaper-api,cz.arcadiamc:arcadepaper-parent deploy
-'''
+            configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS_XML')]) {
+              sh 'mvn -Dmaven.test.skip=true -s $MAVEN_SETTINGS_XML --projects cz.arcadiamc:arcadepaper-api,cz.arcadiamc:arcadepaper-parent deploy'
+            }
           }
         }
-
       }
     }
-
   }
 }
