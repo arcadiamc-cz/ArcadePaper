@@ -1,11 +1,11 @@
-From 376b2a8f78c4eca12ba430ecb4963d13365e7e17 Mon Sep 17 00:00:00 2001
+From 6e87d5b4261e3790b37ccd4bfe03bf0e39985450 Mon Sep 17 00:00:00 2001
 From: Speedy11CZ <speedy@arcadiamc.cz>
 Date: Mon, 9 Aug 2021 20:50:25 +0200
 Subject: [PATCH] This is ArcadePaper
 
 
 diff --git a/pom.xml b/pom.xml
-index fe9d6d26..bc65dcaa 100644
+index fe9d6d26..8b0d1025 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -4,20 +4,15 @@
@@ -14,10 +14,9 @@ index fe9d6d26..bc65dcaa 100644
      <parent>
 -        <groupId>org.github.paperspigot</groupId>
 -        <artifactId>paperspigot-parent</artifactId>
--        <version>dev-SNAPSHOT</version>
 +        <groupId>cz.arcadiamc</groupId>
 +        <artifactId>arcadepaper-parent</artifactId>
-+        <version>1.8-SNAPSHOT</version>
+         <version>dev-SNAPSHOT</version>
      </parent>
  
 -    <groupId>org.github.paperspigot</groupId>
