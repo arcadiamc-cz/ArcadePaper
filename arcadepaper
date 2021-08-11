@@ -55,6 +55,13 @@ case "$1" in
 		mvn clean install
 	)
 	;;
+	"paperclip")
+	(
+		set -e
+		cd "$basedir"
+		scripts/paperclip.sh
+	)
+  ;;
 	*)
 		echo "ArcadePaper build tool."
 		echo ""
@@ -64,6 +71,7 @@ case "$1" in
 		echo "  * p, patch     | Apply patches"
 		echo "  * rb, rebuild  | Rebuild patches"
 		echo "  * j, jar       | Create a runnable JAR"
+		echo "  * paperclip    | Create a Paperclip jar"
 	;;
 esac
 

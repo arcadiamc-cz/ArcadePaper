@@ -7,11 +7,17 @@ pipeline {
       }
     }
 
+    stage('Paperclip') {
+      steps {
+        sh './arcadepaper paperclip'
+      }
+    }
+
     stage('Deployment') {
       parallel {
         stage('Artifact') {
           steps {
-            archiveArtifacts 'ArcadePaper-Server/target/arcadepaper-1.8.8-R0.1-SNAPSHOT.jar'
+            archiveArtifacts 'arcadepaperclip.jar'
           }
         }
 
