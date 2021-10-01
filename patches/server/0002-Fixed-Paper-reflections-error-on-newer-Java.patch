@@ -1,0 +1,28 @@
+From 210b5516936ef52d92e6d4e851cb49b4ee1c67bf Mon Sep 17 00:00:00 2001
+From: Speedy11CZ <michalspisak53@gmail.com>
+Date: Sat, 2 Oct 2021 00:06:29 +0200
+Subject: [PATCH] Fixed Paper reflections error on newer Java
+
+
+diff --git a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
+index d6d9899e..e024ec95 100644
+--- a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
++++ b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
+@@ -189,9 +189,11 @@ public class PaperSpigotConfig
+             maxStack = Material.class.getDeclaredField("maxStack");
+             maxStack.setAccessible(true);
+ 
+-            Field modifiers = Field.class.getDeclaredField("modifiers");
+-            modifiers.setAccessible(true);
+-            modifiers.setInt(maxStack, maxStack.getModifiers() & ~Modifier.FINAL);
++            // ArcadePaper start
++            //Field modifiers = Field.class.getDeclaredField("modifiers");
++            //modifiers.setAccessible(true);
++            //modifiers.setInt(maxStack, maxStack.getModifiers() & ~Modifier.FINAL);
++            // ArcadePaper end
+         } catch (Exception e) {
+             e.printStackTrace();
+             return;
+-- 
+2.30.2
+
