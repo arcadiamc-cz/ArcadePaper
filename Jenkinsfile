@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  
+  tools {
+    jdk '1.8.0_292'
+  }
+  
   stages {
     stage('Build') {
       steps {
