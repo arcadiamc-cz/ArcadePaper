@@ -1,0 +1,22 @@
+From 5daf83d682fe8cfb4b3f45309a6473866d069f7e Mon Sep 17 00:00:00 2001
+From: Speedy11CZ <michalspisak53@gmail.com>
+Date: Mon, 4 Oct 2021 11:47:51 +0200
+Subject: [PATCH] Update MySQL Connector
+
+
+diff --git a/pom.xml b/pom.xml
+index b7b7596a..7cb871a7 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -76,7 +76,7 @@
+         <dependency>
+             <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
+-            <version>5.1.14</version>
++            <version>8.0.26</version>
+             <type>jar</type>
+             <scope>compile</scope>
+         </dependency>
+-- 
+2.28.0.windows.1
+
