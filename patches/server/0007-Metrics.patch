@@ -1,0 +1,22 @@
+From 7f88bbca2a9c02c8ff07912c4caf4fa94c4a0aad Mon Sep 17 00:00:00 2001
+From: Speedy11CZ <michalspisak53@gmail.com>
+Date: Mon, 4 Oct 2021 12:41:46 +0200
+Subject: [PATCH] Metrics
+
+
+diff --git a/src/main/java/org/spigotmc/Metrics.java b/src/main/java/org/spigotmc/Metrics.java
+index 558989ce..496fc315 100644
+--- a/src/main/java/org/spigotmc/Metrics.java
++++ b/src/main/java/org/spigotmc/Metrics.java
+@@ -344,7 +344,7 @@ public class Metrics {
+      */
+     private void postPlugin(final boolean isPing) throws IOException {
+         // Server software specific section
+-        String pluginName = "PaperSpigot"; // PaperSpigot - We need some usage data
++        String pluginName = "ArcadePaper"; // PaperSpigot - We need some usage data // ArcadePaper - nope, we need it more
+         boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if online mode is enabled
+         String pluginVersion = (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown";
+         String serverVersion = Bukkit.getVersion();
+-- 
+2.28.0.windows.1
+

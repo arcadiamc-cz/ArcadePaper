@@ -1,0 +1,46 @@
+From cba2ab782adc16504955c6632e17e8ee816f7b1f Mon Sep 17 00:00:00 2001
+From: Speedy11CZ <michalspisak53@gmail.com>
+Date: Mon, 4 Oct 2021 12:40:55 +0200
+Subject: [PATCH] Avoid blocking on Network Manager creation
+
+
+diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
+index f13182c1..2aadb43b 100644
+--- a/src/main/java/net/minecraft/server/ServerConnection.java
++++ b/src/main/java/net/minecraft/server/ServerConnection.java
+@@ -61,6 +61,15 @@ public class ServerConnection {
+     public volatile boolean d;
+     private final List<ChannelFuture> g = Collections.synchronizedList(Lists.<ChannelFuture>newArrayList());
+     private final List<NetworkManager> h = Collections.synchronizedList(Lists.<NetworkManager>newArrayList());
++    // ArcadePaper start - prevent blocking on adding a new network manager while the server is ticking
++    private final List<NetworkManager> pending = Collections.synchronizedList(Lists.<NetworkManager>newArrayList());
++    private void addPending() {
++        synchronized (pending) {
++            this.h.addAll(pending); // ArcadePaper - OBFHELPER - List of network managers
++            pending.clear();
++        }
++    }
++    // ArcadePaper end
+ 
+     public ServerConnection(MinecraftServer minecraftserver) {
+         this.f = minecraftserver;
+@@ -95,7 +104,7 @@ public class ServerConnection {
+                     channel.pipeline().addLast("timeout", new ReadTimeoutHandler(30)).addLast("legacy_query", new LegacyPingHandler(ServerConnection.this)).addLast("splitter", new PacketSplitter()).addLast("decoder", new PacketDecoder(EnumProtocolDirection.SERVERBOUND)).addLast("prepender", new PacketPrepender()).addLast("encoder", new PacketEncoder(EnumProtocolDirection.CLIENTBOUND));
+                     NetworkManager networkmanager = new NetworkManager(EnumProtocolDirection.SERVERBOUND);
+ 
+-                    ServerConnection.this.h.add(networkmanager);
++                    pending.add(networkmanager); // ArcadePaper
+                     channel.pipeline().addLast("packet_handler", networkmanager);
+                     networkmanager.a((PacketListener) (new HandshakeListener(ServerConnection.this.f, networkmanager)));
+                 }
+@@ -124,6 +133,7 @@ public class ServerConnection {
+ 
+         synchronized (this.h) {
+             // Spigot Start
++            addPending(); // ArcadePaper
+             // This prevents players from 'gaming' the server, and strategically relogging to increase their position in the tick order
+             if ( org.spigotmc.SpigotConfig.playerShuffle > 0 && MinecraftServer.currentTick % org.spigotmc.SpigotConfig.playerShuffle == 0 )
+             {
+-- 
+2.28.0.windows.1
+
