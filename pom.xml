@@ -26,11 +26,12 @@
     <distributionManagement>
         <repository>
             <id>arcadiamc-releases</id>
-            <url>https://nexus.arcadiamc.cz/repository/maven-releases/</url>
+            <url>${releasesUrl}</url>
         </repository>
         <snapshotRepository>
             <id>arcadiamc-snapshots</id>
-            <url>https://nexus.arcadiamc.cz/repository/maven-snapshots/</url>
+            <url>${snapshotsUrl}</url>
         </snapshotRepository>
     </distributionManagement>
+
 </project>
