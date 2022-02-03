@@ -1,4 +1,4 @@
-From ee9e8ca43f8c6264346db55479f73a0763468c2d Mon Sep 17 00:00:00 2001
+From a36ffd9be623656c573eb356d0650ef9d4d6ff88 Mon Sep 17 00:00:00 2001
 From: Speedy11CZ <speedy@arcadiamc.cz>
 Date: Mon, 9 Aug 2021 20:50:25 +0200
 Subject: [PATCH] This is ArcadePaper
@@ -6,7 +6,7 @@ Subject: [PATCH] This is ArcadePaper
   Also includes some legacy mc-dev imports
 
 diff --git a/pom.xml b/pom.xml
-index 6aaba502..90f8ad6f 100644
+index 644305e6..5f7150b6 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -1,12 +1,10 @@
@@ -46,16 +46,7 @@ index 6aaba502..90f8ad6f 100644
              <version>${project.version}</version>
              <type>jar</type>
              <scope>compile</scope>
-@@ -100,7 +98,7 @@
-         <!-- PaperSpigot - Repo for gitdescribe -->
-         <pluginRepository>
-             <id>destroystokyo</id>
--            <url>https://ci.destroystokyo.com/plugin/repository/everything/</url>
-+            <url>https://papermc.io/repo/repository/maven-public/</url>
-         </pluginRepository>
-     </pluginRepositories>
- 
-@@ -109,22 +107,48 @@
+@@ -115,22 +113,48 @@
          <defaultGoal>install</defaultGoal>
          <plugins>
              <plugin>
@@ -120,7 +111,7 @@ index 6aaba502..90f8ad6f 100644
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-jar-plugin</artifactId>
-@@ -135,7 +159,7 @@
+@@ -141,7 +165,7 @@
                          <manifestEntries>
                              <Main-Class>org.bukkit.craftbukkit.Main</Main-Class>
                              <Implementation-Title>CraftBukkit</Implementation-Title>
@@ -129,6 +120,15 @@ index 6aaba502..90f8ad6f 100644
                              <Implementation-Vendor>Bukkit Team</Implementation-Vendor>
                              <Specification-Title>Bukkit</Specification-Title>
                              <Specification-Version>${api.version}</Specification-Version>
+@@ -229,7 +253,7 @@
+             <plugin>
+                 <groupId>net.md-5</groupId>
+                 <artifactId>specialsource-maven-plugin</artifactId>
+-		<version>1.2.3</version> <!-- paper - bump log4j -->
++		        <version>1.2.4</version> <!-- paper - bump log4j -->
+                 <executions>
+                     <execution>
+                         <phase>package</phase>
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
 index b400ce04..fee4a6b0 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
@@ -156,5 +156,5 @@ index 3a4b1424..44b962bd 100644
  
          if (stream != null) {
 -- 
-2.24.1.windows.2
+2.28.0.windows.1
 
