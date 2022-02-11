@@ -1,0 +1,33 @@
+From 8e527830f642a3e1c17311bfcf930ce7feb50e6f Mon Sep 17 00:00:00 2001
+From: Speedy11CZ <michalspisak53@gmail.com>
+Date: Fri, 11 Feb 2022 21:56:33 +0100
+Subject: [PATCH] Handle plugin prefixes in implementation logging
+ configuration
+
+
+diff --git a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
+index c961b18c..25df657a 100644
+--- a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
++++ b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
+@@ -56,7 +56,7 @@ public abstract class JavaPlugin extends PluginBase {
+     private EbeanServer ebean = null;
+     private FileConfiguration newConfig = null;
+     private File configFile = null;
+-    private PluginLogger logger = null;
++    private Logger logger = null; // ArcadePaper - PluginLogger -> Logger
+ 
+     public JavaPlugin() {
+         final ClassLoader classLoader = this.getClass().getClassLoader();
+@@ -351,7 +351,8 @@ public abstract class JavaPlugin extends PluginBase {
+         this.dataFolder = dataFolder;
+         this.classLoader = classLoader;
+         this.configFile = new File(dataFolder, "config.yml");
+-        this.logger = new PluginLogger(this);
++        // ArcadePaper - Handle plugin prefix in implementation
++        this.logger = Logger.getLogger(description.getPrefix() != null ? description.getPrefix() : description.getName());
+ 
+         if (description.isDatabaseEnabled()) {
+             ServerConfig db = new ServerConfig();
+-- 
+2.28.0.windows.1
+

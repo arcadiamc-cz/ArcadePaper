@@ -1,0 +1,52 @@
+From 2ca2d9b4a3d86c40ae0a75a32e558a3177584c90 Mon Sep 17 00:00:00 2001
+From: Speedy11CZ <michalspisak53@gmail.com>
+Date: Fri, 11 Feb 2022 21:56:20 +0100
+Subject: [PATCH] Handle plugin prefixes in implementation logging
+ configuration
+
+
+diff --git a/src/main/java/org/spigotmc/SpigotConfig.java b/src/main/java/org/spigotmc/SpigotConfig.java
+index b9d185d9..99988294 100644
+--- a/src/main/java/org/spigotmc/SpigotConfig.java
++++ b/src/main/java/org/spigotmc/SpigotConfig.java
+@@ -317,7 +317,7 @@ public class SpigotConfig
+     private static void playerSample()
+     {
+         playerSample = getInt( "settings.sample-count", 12 );
+-        System.out.println( "Server Ping Player Sample Count: " + playerSample );
++        Bukkit.getLogger().log( Level.INFO, "Server Ping Player Sample Count: {0}", playerSample ); // ArcadePaper - Use logger
+     }
+ 
+     public static int playerShuffle;
+diff --git a/src/main/resources/log4j2.xml b/src/main/resources/log4j2.xml
+index a3fcd871..d612e975 100644
+--- a/src/main/resources/log4j2.xml
++++ b/src/main/resources/log4j2.xml
+@@ -2,10 +2,22 @@
+ <Configuration status="WARN">
+     <Appenders>
+         <TerminalConsole name="TerminalConsole">
+-            <PatternLayout pattern="%highlightError{[%d{HH:mm:ss} %level]: %minecraftFormatting{%msg}%n%xEx}" />
++            <PatternLayout>
++                <LoggerNamePatternSelector defaultPattern="%highlightError{[%d{HH:mm:ss} %level]: [%logger] %minecraftFormatting{%msg}%n%xEx{full}}">
++                    <!-- Log root, Minecraft, Mojang and Bukkit loggers without prefix -->
++                    <PatternMatch key=",net.minecraft.,Minecraft,com.mojang.,com.sk89q.,ru.tehkode.,Minecraft.AWE"
++                                  pattern="%highlightError{[%d{HH:mm:ss} %level]: %minecraftFormatting{%msg}%n%xEx{full}}" />
++                </LoggerNamePatternSelector>
++            </PatternLayout>
+         </TerminalConsole>
+         <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">
+-            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %minecraftFormatting{%msg}{strip}%n" />
++            <PatternLayout>
++                <LoggerNamePatternSelector defaultPattern="[%d{HH:mm:ss}] [%t/%level]: [%logger] %minecraftFormatting{%msg}{strip}%n%xEx{full}">
++                    <!-- Log root, Minecraft, Mojang and Bukkit loggers without prefix -->
++                    <PatternMatch key=",net.minecraft.,Minecraft,com.mojang.,com.sk89q.,ru.tehkode.,Minecraft.AWE"
++                                  pattern="[%d{HH:mm:ss}] [%t/%level]: %minecraftFormatting{%msg}{strip}%n%xEx{full}" />
++                </LoggerNamePatternSelector>
++            </PatternLayout>
+             <Policies>
+                 <TimeBasedTriggeringPolicy />
+                 <OnStartupTriggeringPolicy />
+-- 
+2.28.0.windows.1
+
