@@ -40,6 +40,13 @@ pipeline {
         }
       }
     }
+
+    stage('Javadoc') {
+      steps {
+        sh 'mvn -Dmaven.test.skip=true -f ArcadePaper-API javadoc:javadoc -DadditionalJOption=-Xdoclint:none'
+        javadoc(javadocDir: 'ArcadePaper-API/target/site/apidocs', keepAll: true)
+      }
+    }
   }
 
   post {
