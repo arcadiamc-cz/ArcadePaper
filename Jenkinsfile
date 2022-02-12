@@ -1,8 +1,12 @@
 pipeline {
   agent any
-  
+
   tools {
     jdk '1.8.0_292'
+  }
+
+  environment {
+    DISCORD_WEBHOOK_URL = credentials('discord-webhook-url')
   }
   
   stages {
@@ -35,6 +39,12 @@ pipeline {
           }
         }
       }
+    }
+  }
+
+  post {
+    always {
+      discordSend image: "${env.JENKINS_URL}/userContent/banner.png", description: "Build completed with status: **${currentBuild.currentResult}**", footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER}", webhookURL: "${DISCORD_WEBHOOK_URL}"
     }
   }
 }
