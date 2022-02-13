@@ -1,4 +1,4 @@
-From 2ca2d9b4a3d86c40ae0a75a32e558a3177584c90 Mon Sep 17 00:00:00 2001
+From e345aad7e82c34b2ce76b6adaa96bf39687a4f99 Mon Sep 17 00:00:00 2001
 From: Speedy11CZ <michalspisak53@gmail.com>
 Date: Fri, 11 Feb 2022 21:56:20 +0100
 Subject: [PATCH] Handle plugin prefixes in implementation logging
@@ -6,10 +6,10 @@ Subject: [PATCH] Handle plugin prefixes in implementation logging
 
 
 diff --git a/src/main/java/org/spigotmc/SpigotConfig.java b/src/main/java/org/spigotmc/SpigotConfig.java
-index b9d185d9..99988294 100644
+index 86716f9e..9f3cad22 100644
 --- a/src/main/java/org/spigotmc/SpigotConfig.java
 +++ b/src/main/java/org/spigotmc/SpigotConfig.java
-@@ -317,7 +317,7 @@ public class SpigotConfig
+@@ -321,7 +321,7 @@ public class SpigotConfig
      private static void playerSample()
      {
          playerSample = getInt( "settings.sample-count", 12 );
