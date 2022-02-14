@@ -8,10 +8,9 @@
 </div>
 
 ## Downloads
-[ArcadePaperclip](https://ci.arcadiamc.cz/job/ArcadePaper/job/main/lastSuccessfulBuild/artifact/arcadepaperclip.jar)
+### [Arcade-Paperclip](https://ci.arcadiamc.cz/job/ArcadePaper/job/main/lastSuccessfulBuild/artifact/arcade-paperclip.jar)
 
 ## API
-
 ### [Javadoc](https://ci.arcadiamc.cz/job/ArcadePaper/job/main/javadoc/index.html)
 
 ### Dependency Information
