@@ -12,11 +12,11 @@ vanillajar="$workdir/work/$mcver/$mcver.jar"
     cd "$basedir/Paperclip"
     mvn clean package "-Dmcver=$mcver" "-Dpaperjar=$paperjar" "-Dvanillajar=$vanillajar"
 )
-cp "$basedir/Paperclip/assembly/target/paperclip-${mcver}.jar" "$basedir/arcadepaperclip.jar"
+cp "$basedir/Paperclip/assembly/target/paperclip-${mcver}.jar" "$basedir/arcade-paperclip.jar"
 
 echo ""
 echo ""
 echo ""
 echo "Build success!"
-echo "Copied final jar to $(cd "$basedir" && pwd -P)/arcadepaperclip.jar"
+echo "Copied final jar to $(cd "$basedir" && pwd -P)/arcade-paperclip.jar"
 ) || exit 1
